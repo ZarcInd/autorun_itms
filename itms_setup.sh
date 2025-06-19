@@ -51,12 +51,12 @@ sudo systemctl enable itms_script.service
 sudo systemctl start itms_script.service
 
 echo "🗃️ Setting up MariaDB database and user..."
-sudo mysql -e "CREATE DATABASE IF NOT EXISTS itms_primeedg;"
-sudo mysql -e "CREATE USER IF NOT EXISTS 'itms_primeedg'@'localhost' IDENTIFIED BY '123';"
-sudo mysql -e "GRANT ALL PRIVILEGES ON itms_primeedg.* TO 'itms_primeedg'@'localhost';"
+sudo mysql -e "CREATE DATABASE IF NOT EXISTS itms_primeedge;"
+sudo mysql -e "CREATE USER IF NOT EXISTS 'itms_primeedge'@'localhost' IDENTIFIED BY '123';"
+sudo mysql -e "GRANT ALL PRIVILEGES ON itms_primeedge.* TO 'itms_primeedge'@'localhost';"
 sudo mysql -e "FLUSH PRIVILEGES;"
 echo "🛠️ Creating required tables in itms_primeedg..."
-sudo mysql -u itms_primeedg -p123 itms_primeedg <<EOF
+sudo mysql -u itms_primeedge -p123 itms_primeedge <<EOF
 CREATE TABLE IF NOT EXISTS raw_data_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     raw_data TEXT,
