@@ -14,9 +14,7 @@ sudo mkdir -p /opt/itms_script
 sudo chown $USER:$USER /opt/itms_script
 wget -O /opt/itms_script/itms_script.php https://raw.githubusercontent.com/ZarcInd/itms_script/main/tcp_server_performant.php
 
-echo "📦 Installing PHP dependencies with Composer..."
-cd /opt/itms_script
-composer install
+
 
 echo "📦 Installing PHP dependencies (Workerman)..."
 cd /opt/itms_script
