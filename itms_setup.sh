@@ -55,9 +55,11 @@ sudo mysql -e "CREATE DATABASE IF NOT EXISTS itms_primeedge;"
 sudo mysql -e "CREATE USER IF NOT EXISTS 'itms_primeedge'@'localhost' IDENTIFIED BY '123';"
 
 echo "🛡️ Granting privileges from root user..."
-sudo mysql -e "GRANT ALL PRIVILEGES ON itms_primeedge.* TO 'itms_primeedge'@'127.0.0.1' IDENTIFIED BY '123';
+sudo mysql <<EOF
+GRANT ALL PRIVILEGES ON itms_primeedge.* TO 'itms_primeedge'@'127.0.0.1' IDENTIFIED BY '123';
 GRANT ALL PRIVILEGES ON itms_primeedge.* TO 'itms_primeedge'@'localhost' IDENTIFIED BY '123';
-FLUSH PRIVILEGES;"
+FLUSH PRIVILEGES;
+EOF
 echo "🛠️ Creating required tables in itms_primeedg..."
 sudo mysql -u itms_primeedge -p123 itms_primeedge <<EOF
 CREATE TABLE IF NOT EXISTS raw_data_logs (
