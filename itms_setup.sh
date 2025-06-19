@@ -51,12 +51,12 @@ sudo systemctl enable itms_script.service
 sudo systemctl start itms_script.service
 
 echo "🗃️ Setting up MariaDB database and user..."
-sudo mysql -e "CREATE DATABASE IF NOT EXISTS itms_primeedge;"
-sudo mysql -e "CREATE USER IF NOT EXISTS 'itms_primeedge'@'localhost' IDENTIFIED BY '123';"
-sudo mysql -e "GRANT ALL PRIVILEGES ON itms_primeedge.* TO 'itms_primeedge'@'localhost';"
+sudo mysql -e "CREATE DATABASE IF NOT EXISTS itms_primeedg;"
+sudo mysql -e "CREATE USER IF NOT EXISTS 'itms_primeedg'@'localhost' IDENTIFIED BY '123';"
+sudo mysql -e "GRANT ALL PRIVILEGES ON itms_primeedg.* TO 'itms_primeedg'@'localhost';"
 sudo mysql -e "FLUSH PRIVILEGES;"
-echo "🛠️ Creating required tables in itms_primeedge..."
-sudo mysql -u itms_primeedge -p123 itms_primeedge <<EOF
+echo "🛠️ Creating required tables in itms_primeedg..."
+sudo mysql -u itms_primeedg -p123 itms_primeedg <<EOF
 CREATE TABLE IF NOT EXISTS raw_data_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     raw_data TEXT,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS itms_data (
     lon_dir VARCHAR(2),
     speed_knots INT,
     network VARCHAR(20),
-    route_no DECIMAL(10,2),
+    route_no VARCHAR(20);,
     speed_kmh DECIMAL(10,2),
     odo_meter INT,
     Led_health_1 INT,
