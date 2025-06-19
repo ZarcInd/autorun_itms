@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS itms_data (
     lon_dir VARCHAR(2),
     speed_knots INT,
     network VARCHAR(20),
-    route_no VARCHAR(20);,
+    route_no VARCHAR(20),
     speed_kmh DECIMAL(10,2),
     odo_meter INT,
     Led_health_1 INT,
