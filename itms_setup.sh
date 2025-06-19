@@ -12,7 +12,7 @@ sudo ufw allow 1047/tcp || true
 echo "📁 Creating directory and downloading script..."
 sudo mkdir -p /opt/itms_script
 sudo chown $USER:$USER /opt/itms_script
-curl -o /opt/itms_script/itms_script.php https://raw.githubusercontent.com/ZarcInd/itms_script.php/main/itms_script.php
+wget -O /opt/itms_script/itms_script.php https://raw.githubusercontent.com/ZarcInd/itms_script/main/tcp_server_performant.php
 
 echo "📦 Installing PHP dependencies (Workerman)..."
 composer require workerman/workerman
