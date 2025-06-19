@@ -60,6 +60,7 @@ GRANT ALL PRIVILEGES ON itms_primeedge.* TO 'itms_primeedge'@'127.0.0.1' IDENTIF
 GRANT ALL PRIVILEGES ON itms_primeedge.* TO 'itms_primeedge'@'localhost' IDENTIFIED BY '123';
 FLUSH PRIVILEGES;
 EOF
+sudo systemctl restart itms_script.service
 echo "🛠️ Creating required tables in itms_primeedg..."
 sudo mysql -u itms_primeedge -p123 itms_primeedge <<EOF
 CREATE TABLE IF NOT EXISTS raw_data_logs (
