@@ -14,7 +14,12 @@ sudo mkdir -p /opt/itms_script
 sudo chown $USER:$USER /opt/itms_script
 wget -O /opt/itms_script/itms_script.php https://raw.githubusercontent.com/ZarcInd/itms_script/main/tcp_server_performant.php
 
+echo "📦 Installing PHP dependencies with Composer..."
+cd /opt/itms_script
+composer install
+
 echo "📦 Installing PHP dependencies (Workerman)..."
+cd /opt/itms_script
 composer require workerman/workerman
 
 echo "🛠️ Setting up dummy stats file..."
@@ -52,6 +57,44 @@ sudo mysql -e "CREATE DATABASE IF NOT EXISTS itms_primeedge;"
 sudo mysql -e "CREATE USER IF NOT EXISTS 'itms_primeedge'@'localhost' IDENTIFIED BY '123';"
 sudo mysql -e "GRANT ALL PRIVILEGES ON itms_primeedge.* TO 'itms_primeedge'@'localhost';"
 sudo mysql -e "FLUSH PRIVILEGES;"
+echo "🛠️ Creating required tables in itms_primeedge..."
+sudo mysql -u itms_primeedge -p123 itms_primeedge <<EOF
+CREATE TABLE IF NOT EXISTS raw_data_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    raw_data TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS itms_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    packet_header VARCHAR(50),
+    mode VARCHAR(10),
+    device_type VARCHAR(10),
+    packet_type VARCHAR(10),
+    firmware_version VARCHAR(50),
+    device_id VARCHAR(25),
+    ignition VARCHAR(10),
+    driver_id INT,
+    time VARCHAR(20),
+    date VARCHAR(20),
+    gps VARCHAR(5),
+    lat DECIMAL(10,6),
+    lat_dir VARCHAR(2),
+    lon DECIMAL(10,6),
+    lon_dir VARCHAR(2),
+    speed_knots INT,
+    network VARCHAR(20),
+    route_no DECIMAL(10,2),
+    speed_kmh DECIMAL(10,2),
+    odo_meter INT,
+    Led_health_1 INT,
+    Led_health_2 INT,
+    Led_health_3 INT,
+    Led_health_4 INT,
+    partition_key INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+EOF
 
 echo "✅ Setup Complete. Server is running and database is ready."
 sudo systemctl status itms_script.service
